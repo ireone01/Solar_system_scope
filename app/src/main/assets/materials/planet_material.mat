@@ -1,0 +1,19 @@
+material {
+  name : "PlanetMaterial",
+  shadingModel : lit,
+  parameters : [
+    { type : float3, name : baseColor },
+    { type : float3, name : emissiveColor },
+    { type : float, name : emissiveIntensity }
+  ],
+  requires : [
+    uv0
+  ]
+}
+fragment {
+  void material(inout MaterialInputs material) {
+    prepareMaterial(material);
+    material.baseColor = vec4(materialParams.baseColor, 1.0);
+    material.emissive = vec4(materialParams.emissiveColor, 1.0)  * materialParams.emissiveIntensity;
+  }
+}
